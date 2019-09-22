@@ -1,0 +1,123 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+       xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+       xmlns:context="http://www.springframework.org/schema/context"
+       xmlns:mvc="http://www.springframework.org/schema/mvc"
+       xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd http://www.springframework.org/schema/context http://www.springframework.org/schema/context/spring-context.xsd http://www.springframework.org/schema/mvc http://www.springframework.org/schema/mvc/spring-mvc.xsd">
+
+    <!--配置自定扫描的包 -->
+    <context:component-scan base-package="com.starfall.springmvc"></context:component-scan>
+
+    <!--配置视图解析器-->
+    <bean class="org.springframework.web.servlet.view.InternalResourceViewResolver">
+        <property name="prefix" value="/WEB-INF/views/"></property>
+        <!--<property name="suffix" value=".jsp"></property>-->
+    </bean>
+
+
+    <mvc:view-controller path="/main" view-name="main.html"></mvc:view-controller>
+    <mvc:view-controller path="/main1" view-name="main1.html"></mvc:view-controller>
+    <mvc:view-controller path="/main2" view-name="main2.jsp"></mvc:view-controller>
+    <mvc:view-controller path="/main3" view-name="main3.html"></mvc:view-controller>
+    <mvc:view-controller path="/main4" view-name="main4.html"></mvc:view-controller>
+    <mvc:view-controller path="/main5" view-name="main5.html"></mvc:view-controller>
+    <mvc:view-controller path="/main6" view-name="main6.html"></mvc:view-controller>
+    <mvc:view-controller path="/main7" view-name="main7.html"></mvc:view-controller>
+
+    <!--配置自定义的类型转换器-->
+    <bean id="conversionService"
+          class="org.springframework.format.support.FormattingConversionServiceFactoryBean">
+        <property name="converters">
+            <set>
+                <ref bean="dateConverter"></ref>
+            </set>
+        </property>
+    </bean>
+
+
+    <mvc:default-servlet-handler/>
+    <mvc:annotation-driven conversion-service="conversionService">
+        <!--关于使用Ajax请求json数据，@RequestMapping返回中文乱码的解决办法 -->
+        <mvc:message-converters>
+            <bean class="org.springframework.http.converter.StringHttpMessageConverter">
+                <property name="supportedMediaTypes">
+                    <list>
+                        <value>text/html;charset=UTF-8</value>
+                        <value>application/json;charset=UTF-8</value>
+                        <value>*/*;charset=UTF-8</value>
+                    </list>
+                </property>
+            </bean>
+        </mvc:message-converters>
+
+    </mvc:annotation-driven>
+
+
+    <!-- 配置文件上传下载 MultipartResolver -->
+    <bean id="multipartResolver"
+          class="org.springframework.web.multipart.commons.CommonsMultipartResolver">
+        <!-- 设定默认编码 -->
+        <property name="defaultEncoding" value="UTF-8"></property>
+        <!-- 设定文件上传时写入内存的最大值，如果小于这个参数不会生成临时文件，默认为1024 -->
+        <property name="maxInMemorySize" value="4096"></property>
+        <!-- 设定文件上传的最大值为10MB，10*1024*1024-->
+        <property name="maxUploadSize" value="10485760"></property>
+        <!-- 延迟文件解析,懒加载，当调用DefaultMultipartHttpServletRequest的getMultipartFiles()方法时才解析请求数据-->
+        <property name="resolveLazily" value="true"></property>
+        <!-- 上传文件的临时路径 -->
+        <property name="uploadTempDir" value="/"></property>
+    </bean>
+
+
+    <!--配置拦截器-->
+    <mvc:interceptors>
+        <!--log拦截器-->
+        <mvc:interceptor>
+            <!--配置作用的url /**的意思是所有文件夹及里面的子文件夹 /*是所有文件夹，不含子文件夹 -->
+            <mvc:mapping path="/**"/>
+            <!-- 配置不作用的URL,resources中为静态资源，无需拦截-->
+            <mvc:exclude-mapping path="/resources/**"/>
+            <bean class="com.starfall.springmvc.demo.interceptors.LoggerInterceptor"></bean>
+        </mvc:interceptor>
+
+        <mvc:interceptor>
+            <!--配置作用的url /**的意思是所有文件夹及里面的子文件夹 /*是所有文件夹，不含子文件夹 -->
+            <mvc:mapping path="/demo6/testInterceptor"/>
+            <!-- 配置不作用的URL -->
+            <mvc:exclude-mapping path="/demo5"/>
+            <bean class="com.starfall.springmvc.demo.interceptors.single.InterceptorDemo"></bean>
+        </mvc:interceptor>
+
+        <!--测试多个拦截器-->
+        <mvc:interceptor>
+            <mvc:mapping path="/demo6/testInterceptors"/>
+            <bean class="com.starfall.springmvc.demo.interceptors.mutils.FirstInterceptor"></bean>
+        </mvc:interceptor>
+        <mvc:interceptor>
+            <mvc:mapping path="/demo6/testInterceptors"/>
+            <bean class="com.starfall.springmvc.demo.interceptors.mutils.SecondInterceptor"></bean>
+        </mvc:interceptor>
+        <mvc:interceptor>
+            <mvc:mapping path="/demo6/testInterceptors"/>
+            <bean class="com.starfall.springmvc.demo.interceptors.mutils.ThirdInterceptor"></bean>
+        </mvc:interceptor>
+    </mvc:interceptors>
+
+
+    <!-- 配置使用 SimpleMappingExceptionResolver 来映射异常 -->
+    <bean class="org.springframework.web.servlet.handler.SimpleMappingExceptionResolver">
+        <!--配置异常的属性值为exp，那么在错误页面中可以通过 ${exp} 来获取异常的信息 如果不配置这个属性，它的默认值为exception -->
+        <property name="exceptionAttribute" value="exp"></property>
+        <!-- 为所有的异常定义默认的异常处理页面，exceptionMappings未定义的异常使用本默认配置 -->
+        <property name="defaultErrorView" value="error.jsp"></property>
+        <!--
+    　　　　定义需要特殊处理的异常，用类名或完全路径名作为key，异常页文件名作为值，
+    　　　　将不同的异常映射到不同的页面上。
+    　　 -->
+        <property name="exceptionMappings">
+            <props>
+                <prop key="java.lang.ArrayIndexOutOfBoundsException">error.jsp</prop>
+            </props>
+        </property>
+    </bean>
+</beans>

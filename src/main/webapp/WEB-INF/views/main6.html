@@ -1,0 +1,79 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <meta charset="utf-8">
+    <title></title>
+    <link href="../../resources/bootstrap-3.3.7/css/bootstrap.min.css" rel="stylesheet">
+    <script src="../../resources/js/jquery-3.3.1.min.js" type="text/javascript" charset="utf-8"></script>
+    <script src="../../resources/bootstrap-3.3.7/js/bootstrap.min.js" type="text/javascript" charset="utf-8"></script>
+    <style type="text/css" media="screen">
+        body {
+            padding-top: 100px;
+        }
+    </style>
+</head>
+
+<body>
+<!-- 首页导航Bar -->
+<nav class="navbar navbar-inverse navbar-fixed-top">
+    <div class="container">
+        <div class="navbar-header">
+            <a class="navbar-brand" href="">Project name</a>
+        </div>
+    </div>
+</nav>
+<!-- 主体 -->
+<div class="container-fluid">
+    <div class="container">
+        <nav class="navbar navbar-default">
+            <div class="navbar-form navbar-left">
+                <div class="form-group">
+                    <a class="btn btn-default" href="/main" role="button">返回首页</a>
+                </div>
+            </div>
+        </nav>
+        <div class="jumbotron">
+            <button class="btn btn-default" id="testInterceptor">测试单个拦截器</button>
+            <button class="btn btn-default" id="testInterceptors">测试多个个拦截器</button>
+        </div>
+        <div class="well well-lg" id="responseData"></div>
+    </div>
+</div>
+</body>
+<script type="text/javascript">
+    $('#testInterceptor').click(function (event) {
+        $.ajax({
+            url: '/demo6/testInterceptor',
+            type: 'GET',
+            success: function (data) {
+                $('#responseData').html(JSON.stringify(data));
+            }
+        }).done(function () {
+            console.log("success");
+        }).fail(function () {
+            console.log("error");
+        }).always(function () {
+            console.log("complete");
+        });
+    });
+    $('#testInterceptors').click(function (event) {
+        $.ajax({
+            url: '/demo6/testInterceptors',
+            type: 'GET',
+            success: function (data) {
+                $('#responseData').html(JSON.stringify(data));
+            }
+        }).done(function () {
+            console.log("success");
+        }).fail(function () {
+            console.log("error");
+        }).always(function () {
+            console.log("complete");
+        });
+    });
+</script>
+<script type="text/javascript" color="255,0,0" opacity='0.7' count='200'
+        src="https://cdn.bootcss.com/canvas-nest.js/1.0.1/canvas-nest.min.js"></script>
+
+</html>

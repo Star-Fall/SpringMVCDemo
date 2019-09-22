@@ -1,0 +1,381 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <meta charset="utf-8">
+    <title></title>
+    <link href="../../resources/bootstrap-3.3.7/css/bootstrap.min.css" rel="stylesheet">
+    <script src="../../resources/js/jquery-3.3.1.min.js" type="text/javascript" charset="utf-8"></script>
+    <script src="../../resources/bootstrap-3.3.7/js/bootstrap.min.js" type="text/javascript" charset="utf-8"></script>
+    <style type="text/css" media="screen">
+        body {
+            padding-top: 100px;
+        }
+    </style>
+</head>
+
+<body>
+<!-- 首页导航Bar -->
+<nav class="navbar navbar-inverse navbar-fixed-top">
+    <div class="container">
+        <div class="navbar-header">
+            <a class="navbar-brand" href="">Project name</a>
+        </div>
+    </div>
+</nav>
+<!-- 主体 -->
+<div class="container-fluid">
+    <div class="container">
+        <nav class="navbar navbar-default">
+            <div class="navbar-form navbar-left">
+                <div class="form-group">
+                    <a class="btn btn-default" href="/main" role="button">返回首页</a>
+                </div>
+            </div>
+        </nav>
+        <div class="jumbotron">
+            <!--Form表单上传单个文件-->
+            <span class="label label-primary">Form表单上传单个文件</span>
+            <form class="form-horizontal" method="POST" enctype="multipart/form-data" action="/demo5/testFileUpLoad">
+                <div class="form-group">
+                    <label for="fileName1" class="col-sm-2 control-label">FileName：</label>
+                    <div class="col-sm-10">
+                        <input type="text" class="form-control" id="fileName1" placeholder="文件名" name="fileName">
+                    </div>
+                </div>
+                <div class="form-group">
+                    <label for="filePath1" class="col-sm-2 control-label">FilePath：</label>
+                    <div class="col-sm-10">
+                        <input type="text" class="form-control" id="filePath1" placeholder="路径" name="filePath">
+                    </div>
+                </div>
+                <div class="form-group">
+                    <label for="file1" class="col-sm-2 control-label">File：</label>
+                    <div class="col-sm-10">
+                        <input type="file" class="form-control" id="file1" placeholder="文件" name="file">
+                    </div>
+                </div>
+                <div class="form-group">
+                    <div class="col-sm-offset-2 col-sm-10">
+                        <button type="submit" class="btn btn-primary" id="upLoadBtn1">Form表单上传单个文件</button>
+                    </div>
+                </div>
+            </form>
+        </div>
+        <div class="jumbotron">
+            <!--Ajax上传单个文件-->
+            <span class="label label-success">Ajax上传单个文件</span>
+            <div class="form-horizontal">
+                <div class="form-group">
+                    <label for="fileName2" class="col-sm-2 control-label">FileName：</label>
+                    <div class="col-sm-10">
+                        <input type="text" class="form-control" id="fileName2" placeholder="文件名" name="fileName">
+                    </div>
+                </div>
+                <div class="form-group">
+                    <label for="filePath2" class="col-sm-2 control-label">FilePath：</label>
+                    <div class="col-sm-10">
+                        <input type="text" class="form-control" id="filePath2" placeholder="路径" name="filePath">
+                    </div>
+                </div>
+                <div class="form-group">
+                    <label for="file2" class="col-sm-2 control-label">File：</label>
+                    <div class="col-sm-10">
+                        <input type="file" class="form-control" id="file2" placeholder="文件" name="file">
+                    </div>
+                </div>
+                <div class="form-group">
+                    <div class="col-sm-offset-2 col-sm-10">
+                        <button type="submit" class="btn btn-success" id="upLoadBtn2">AjAX上传单个文件</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="jumbotron">
+            <!--Ajax上传多个文件-->
+            <span class="label label-danger">Ajax上传多个文件</span>
+            <div class="form-horizontal">
+                <div class="form-group">
+                    <label for="filePath3" class="col-sm-2 control-label">FilePath：</label>
+                    <div class="col-sm-10">
+                        <input type="text" class="form-control" id="filePath3" placeholder="路径" name="filePath">
+                    </div>
+                </div>
+                <div class="form-group">
+                    <label for="file3" class="col-sm-2 control-label">File：</label>
+                    <div class="col-sm-10">
+                        <input type="file" class="form-control" id="file3" placeholder="文件" name="file"
+                               multiple="multiple">
+                    </div>
+                </div>
+                <div class="form-group">
+                    <div class="col-sm-offset-2 col-sm-10">
+                        <button type="submit" class="btn btn-danger" id="upLoadBtn3">AjAX上传多个文件</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="jumbotron">
+            <!--Ajax上传多个文件PLUS-->
+            <span class="label label-warning">Ajax上传多个文件PLUS</span>
+            <div class="form-horizontal">
+                <div class="form-group">
+                    <label for="filePath4" class="col-sm-2 control-label">FilePath：</label>
+                    <div class="col-sm-10">
+                        <input type="text" class="form-control" id="filePath4" placeholder="路径" name="filePath">
+                    </div>
+                </div>
+                <div class="form-group">
+                    <label for="file4_1" class="col-sm-2 control-label">File1：</label>
+                    <div class="col-sm-10">
+                        <input type="file" class="form-control" id="file4_1" placeholder="文件" name="file">
+                    </div>
+                </div>
+                <div class="form-group">
+                    <label for="file4_2" class="col-sm-2 control-label">File2：</label>
+                    <div class="col-sm-10">
+                        <input type="file" class="form-control" id="file4_2" placeholder="文件" name="file">
+                    </div>
+                </div>
+                <div class="form-group">
+                    <div class="col-sm-offset-2 col-sm-10">
+                        <button type="submit" class="btn btn-warning" id="upLoadBtn4">Ajax上传多个文件PLUS</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="jumbotron">
+            <!-- 下载文件 -->
+            <div style="margin-bottom: 10px">
+                <span class="label label-danger">文件下载</span>
+                <button class="label btn btn-primary" id="readFileList">点击读取文件</button>
+            </div>
+            <div class="form-horizontal">
+                <div class="form-group">
+                    <label for="filePath5" class="col-sm-1 control-label">FilePath：</label>
+                    <div class="col-sm-11">
+                        <input type="text" class="form-control" id="filePath5" placeholder="路径" name="filePath">
+                    </div>
+                </div>
+                <div class="form-group">
+                    <ul class="list-group" id="file_ul">
+                        <!-- <li class="list-group-item checkbox"><label><input type="checkbox">Cras justo odio </label></li> -->
+                    </ul>
+                </div>
+                <button type="button" class="btn btn-danger" id="downLoadBtn">下载文件</button>
+            </div>
+        </div>
+        <div class="jumbotron">
+            foot
+        </div>
+    </div>
+</div>
+</div>
+</body>
+<script type="text/javascript">
+    /**
+     * AjAX上传单个文件
+     */
+    $('#upLoadBtn2').click(function (event) {
+        //组装formData
+        var formData = new FormData();
+        formData.append('fileName', $('#fileName2').val());
+        formData.append('filePath', $('#filePath2').val());
+        formData.append('file', document.getElementById("file2").files[0]);
+        $.ajax({
+            url: '/demo5/testFileUpLoad/ajax',
+            type: 'POST',
+            data: formData,
+            contentType: false, //必须false才会自动加上正确的Content-Type
+            processData: false,
+            success: function (response) {
+                if (response.code == 200) {
+                    alert("上传成功！清空表单...");
+                    //清空input
+                    $('#fileName2').val('');
+                    $('#filePath2').val('');
+                    var obj = document.getElementById('file2');
+                    obj.outerHTML = obj.outerHTML;
+                } else if (response.code == 400) {
+                    alert(response.errMsg);
+                }
+            }
+        }).done(function () {
+            console.log("success");
+        }).fail(function () {
+            console.log("error");
+        }).always(function () {
+            console.log("complete");
+        });
+    });
+
+    /**
+     * AjAX上传多个文件
+     */
+    $('#upLoadBtn3').click(function (event) {
+        //组装formData
+        var formData = new FormData();
+        formData.append('filePath', $('#filePath3').val());
+        //获取多个文件数组
+        var files = document.getElementById('file3').files;
+        //对每个文件进行遍历添加
+        for (var i = 0; i < files.length; i++) {
+            formData.append('files', files[i]);
+        }
+        $.ajax({
+            url: '/demo5/testFileUpLoad/ajax/multi',
+            type: 'POST',
+            data: formData,
+            contentType: false, //必须false才会自动加上正确的Content-Type
+            processData: false,
+            success: function (response) {
+                if (response.code == 200) {
+                    alert("上传成功！清空表单...");
+                    //清空input
+                    $('#fileName3').val('');
+                    $('#filePath3').val('');
+                    var obj = document.getElementById('file3');
+                    obj.outerHTML = obj.outerHTML;
+                } else if (response.code == 400) {
+                    alert(response.errMsg);
+                }
+            }
+        }).done(function () {
+            console.log("success");
+        }).fail(function () {
+            console.log("error");
+        }).always(function () {
+            console.log("complete");
+        });
+    });
+
+    /**
+     * Ajax上传多个文件PLUS
+     */
+    $('#upLoadBtn4').click(function (event) {
+        //组装formData
+        var formData = new FormData();
+        formData.append('filePath', $('#filePath4').val());
+        //追加两个file
+        formData.append('files', document.getElementById("file4_1").files[0]);
+        formData.append('files', document.getElementById("file4_2").files[0]);
+        console.log(formData);
+
+        $.ajax({
+            //后台服务和AjAX上传多个文件相同
+            url: '/demo5/testFileUpLoad/ajax/multi',
+            type: 'POST',
+            data: formData,
+            contentType: false, //必须false才会自动加上正确的Content-Type
+            processData: false,
+            success: function (response) {
+                if (response.code == 200) {
+                    alert("上传成功！清空表单...");
+                    //清空input
+                    $('#filePath4').val('');
+                    var obj = document.getElementById('file4_1');
+                    obj.outerHTML = obj.outerHTML;
+                    obj = document.getElementById('file4_2');
+                    obj.outerHTML = obj.outerHTML;
+                } else if (response.code == 400) {
+                    alert(response.errMsg);
+                }
+            }
+        }).done(function () {
+            console.log("success");
+        }).fail(function () {
+            console.log("error");
+        }).always(function () {
+            console.log("complete");
+        });
+    });
+
+    /**
+     * 读取文件
+     */
+    $('#readFileList').click(function (event) {
+        var param = {};
+        param.filePath = $('#filePath5').val();
+        $.ajax({
+            url: '/demo5/readFileList',
+            type: 'GET',
+            data: param,
+            success: function (response) {
+                if (response.code == '200') {
+                    var files = response.data;
+                    $('#file_ul').html('');
+                    $.each(files, function (index, val) {
+                        var input = $('<input>').attr({type: 'checkbox', value: val});
+                        var label = $('<label></label>').append(input).append(val);
+                        var li = $('<li></li>').append(label).attr({class: 'list-group-item checkbox'});
+                        $('#file_ul').append(li);
+                    });
+                } else if (response.code == 400) {
+                    alert(response.errMsg);
+                }
+            }
+        }).done(function () {
+            console.log("success");
+        }).fail(function () {
+            console.log("error");
+        }).always(function () {
+            console.log("complete");
+        });
+    });
+
+    /**
+     * 下载文件
+     */
+    $('#downLoadBtn').click(function (event) {
+        //获取文件参数
+        var filePath = $('#filePath5').val();
+        var files = new Array();
+        $("#file_ul input:checked").each(function (index, el) {
+            files.push($(el).val())
+        });
+        var param = {};
+        param.filePath = filePath;
+        param.files = files;
+        //先执行检查
+        $.ajax({
+            url: '/demo5/downLoadFile/check',
+            type: 'GET',
+            data: param,
+            success: function (response) {
+                if (response.code == 400) {
+                    alert(response.errMsg);
+                } else if (response.code == '200') {
+                    var form = $("<form>");
+                    form.attr({
+                        action: '/demo5/downLoadFile',
+                        method: 'POST',
+                        style: 'display:none'
+                    });
+                    var input1 = $('<input>').attr({
+                        type: 'hidden',
+                        name: 'filePath',
+                        value: response.data.filePath
+                    });
+                    var input2 = $('<input>').attr({
+                        type: 'hidden',
+                        name: 'files',
+                        value: response.data.files
+                    });
+                    $("body").append(form);
+                    form.append(input1);
+                    form.append(input2);
+                    form.submit();//表单提交
+                }
+            }
+        }).done(function () {
+            console.log("success");
+        }).fail(function () {
+            console.log("error");
+        }).always(function () {
+            console.log("complete");
+        });
+    })
+</script>
+<script type="text/javascript" color="255,0,0" opacity='0.7' count='200'
+        src="https://cdn.bootcss.com/canvas-nest.js/1.0.1/canvas-nest.min.js"/>
+</html>

@@ -1,0 +1,273 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <meta charset="utf-8">
+    <title></title>
+    <link href="../../resources/bootstrap-3.3.7/css/bootstrap.min.css" rel="stylesheet">
+    <script src="../../resources/js/jquery-3.3.1.min.js" type="text/javascript" charset="utf-8"></script>
+    <script src="../../resources/bootstrap-3.3.7/js/bootstrap.min.js" type="text/javascript" charset="utf-8"></script>
+    <style type="text/css" media="screen">
+        body {
+            padding-top: 100px;
+        }
+    </style>
+</head>
+
+<body>
+<!-- 首页导航Bar -->
+<nav class="navbar navbar-inverse navbar-fixed-top">
+    <div class="container">
+        <div class="navbar-header">
+            <a class="navbar-brand" href="">Project name</a>
+        </div>
+    </div>
+</nav>
+<!-- 主体 -->
+<div class="container-fluid">
+    <div class="container">
+        <nav class="navbar navbar-default">
+            <div class="navbar-form navbar-left">
+                <div class="form-group">
+                    <a class="btn btn-default" href="/main" role="button">返回首页</a>
+                </div>
+            </div>
+        </nav>
+        <div class="jumbotron">
+            <button class="btn btn-default" id="testRestGet">测试RestGet</button>
+            <button class="btn btn-default" id="testRestPost">测试RestPost</button>
+            <button class="btn btn-default" id="testRestDelete">测试RestDelete</button>
+            <button class="btn btn-default" id="testRestPut">测试RestPut</button>
+            <br><br>
+            <button class="btn btn-default" id="testRequestMapping1">测试testRequestMapping1</button>
+            <button class="btn btn-default" id="testRequestMapping2">测试testRequestMapping2</button>
+            <button class="btn btn-default" id="testRequestMapping3">测试testRequestMapping3</button>
+            <button class="btn btn-default" id="testRequestMapping4">测试testRequestMapping4</button>
+            <br><br>
+            <input class="form-control" style="width: 20%;display: inline;" type="text" placeholder="参数"
+                   id="testPathVariableParam">
+            <button class="btn btn-default" id="testPathVariable">测试PathVariable</button>
+            <button class="btn btn-default" id="testPathVariable2">测试PathVariable2</button>
+            <br><br>
+            <input class="form-control" style="width: 20%;display: inline;" type="text" placeholder="参数"
+                   id="testRequestParamParam">
+            <button class="btn btn-default" id="testRequestParam0">测试RequestParam0</button>
+            <button class="btn btn-default" id="testRequestParam1">测试RequestParam1</button>
+            <br><br>
+            <button class="btn btn-default" id="testRequestHeader">测试RequestHeader</button>
+            <button class="btn btn-default" id="testCookieValue">测试CookieValue</button>
+            <button class="btn btn-default" id="testRequestBody">测试RequestBody</button>
+            <button class="btn btn-default" id="testPojo">测试Pojo</button>
+        </div>
+    </div>
+</div>
+</body>
+<script type="text/javascript">
+    $('#testRestGet').click(function (event) {
+        $.ajax({
+            type: 'GET',
+            url: '/demo1/testRestGet',
+            success: function (data) {
+                alert(data);
+            }
+        })
+    });
+
+    $('#testRestPost').click(function (event) {
+        $.ajax({
+            type: 'POST',
+            url: '/demo1/testRestPost',
+            success: function (data) {
+                alert(data);
+            }
+        })
+    });
+
+    $('#testRestDelete').click(function (event) {
+        $.ajax({
+            type: 'POST',
+            url: '/demo1/testRestDelete',
+            data: '_method=DELETE',
+            success: function (data) {
+                alert(data);
+            }
+        })
+    });
+
+    $('#testRestPut').click(function (event) {
+        $.ajax({
+            type: 'POST',
+            url: '/demo1/testRestPut',
+            data: '_method=PUT',
+            success: function (data) {
+                alert(data);
+            }
+        })
+    });
+
+    $('#testRequestMapping1').click(function (event) {
+        $.ajax({
+            type: 'GET',
+            url: '/demo1/testRequestMapping1',
+            data: {param0: '110', param1: '110'},
+            success: function (data) {
+                alert(data);
+            }
+        })
+    })
+
+    $('#testRequestMapping2').click(function (event) {
+        $.ajax({
+            type: 'GET',
+            url: '/demo1/testRequestMapping2',
+            success: function (data) {
+                alert(data);
+            }
+        })
+    })
+
+    $('#testRequestMapping3').click(function (event) {
+        $.ajax({
+            type: 'GET',
+            url: '/demo1/testRequestMapping3',
+            contentType: 'application/json',
+            success: function (data) {
+                alert(data);
+            }
+        })
+    })
+
+    $('#testRequestMapping4').click(function (event) {
+        $.ajax({
+            type: 'GET',
+            url: '/demo1/testRequestMapping4',
+            success: function (data) {
+                alert(data);
+            }
+        })
+    })
+
+    $('#testPathVariable').click(function (event) {
+        $.ajax({
+            type: 'GET',
+            url: '/demo1/testPathVariable/' + $('#testPathVariableParam').val(),
+            success: function (data) {
+                alert(data);
+            }
+        })
+    })
+
+    $('#testPathVariable2').click(function (event) {
+        $.ajax({
+            type: 'GET',
+            url: '/demo1/testPathVariable/qq/12',
+            success: function (data) {
+                alert(data);
+            }
+        })
+    })
+
+    $('#testRequestParam0').click(function (event) {
+        var param = {};
+        param.param1 = $('#testRequestParamParam').val();
+        param.param2 = 12;
+        param.param3 = 0.12;
+        $.ajax({
+            url: '/demo1/testRequestParam0',
+            type: 'GET',
+            data: param,
+            scriptCharset: 'utf-8',
+            success: function (data) {
+                alert(data);
+            }
+        }).done(function () {
+            console.log("success");
+        }).fail(function () {
+            console.log("error");
+        }).always(function () {
+            console.log("complete");
+        });
+    });
+
+    $('#testRequestParam1').click(function (event) {
+        var param = {};
+        param.param1 = $('#testRequestParamParam').val();
+        param.paramInt = 12;
+        $.ajax({
+            url: '/demo1/testRequestParam1',
+            type: 'GET',
+            data: param,
+            success: function (data) {
+                alert(data);
+            }
+        }).done(function () {
+            console.log("success");
+        }).fail(function () {
+            console.log("error");
+        }).always(function () {
+            console.log("complete");
+        });
+    });
+
+    $('#testRequestHeader').click(function (event) {
+        $.ajax({
+            type: 'GET',
+            url: '/demo1/testRequestHeader',
+            contentType: 'application/json',
+            success: function (data) {
+                alert(data);
+            }
+        })
+    })
+
+    $('#testCookieValue').click(function (event) {
+        $.ajax({
+            type: 'GET',
+            url: '/demo1/testCookieValue',
+            success: function (data) {
+                alert(data);
+            }
+        })
+    })
+
+    $('#testRequestBody').click(function (event) {
+        var param = {};
+        param.param1 = 'Stringparam1';
+        param.param2 = '100';
+        param.param3 = false;
+        param.param4 = '0.123';
+        param.param5 = new Date();
+        param = JSON.stringify(param);
+        console.log(param);
+        $.ajax({
+            type: 'POST',
+            url: '/demo1/testRequestBody',
+            data: param,
+            contentType: 'application/json',
+            success: function (data) {
+                alert(data);
+            }
+        })
+    })
+
+    $('#testPojo').click(function (event) {
+        var param = {};
+        param.param1 = 'params1参数';
+        param.param2 = '121';
+        param.param3 = false;
+        param.param4 = '0.111';
+        param.param5 = new Date();
+        $.ajax({
+            type: 'GET',
+            url: '/demo1/testPojo',
+            data: param,
+            success: function (data) {
+                alert(data);
+            }
+        })
+    })
+</script>
+<script type="text/javascript" color="255,0,0" opacity='0.7' count='200'
+        src="https://cdn.bootcss.com/canvas-nest.js/1.0.1/canvas-nest.min.js"></script>
+
+</html>
