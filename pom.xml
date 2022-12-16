@@ -19,7 +19,7 @@
         <argLine>-Dfile.encoding=UTF-8</argLine>
         <maven.compiler.source>1.8</maven.compiler.source>
         <maven.compiler.target>1.8</maven.compiler.target>
-        <spring.version>4.3.23.RELEASE</spring.version>
+        <spring.version>5.2.20.RELEASE</spring.version>
         <junit.version>4.12</junit.version>
     </properties>
 
